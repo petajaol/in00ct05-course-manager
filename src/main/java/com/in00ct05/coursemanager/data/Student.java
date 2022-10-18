@@ -6,7 +6,7 @@ public class Student {
   private String firstName, lastName;
 
   public Student(String firstName, String lastName) {
-    this.id = count++;
+    this.id = ++count;
     this.firstName = firstName;
     this.lastName = lastName;
   }

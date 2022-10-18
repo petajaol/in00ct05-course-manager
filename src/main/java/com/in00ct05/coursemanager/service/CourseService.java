@@ -63,10 +63,11 @@ public class CourseService {
     return null;
   }
 
-  public void addAttendee(int id, Student student) {
+  public void addAttendee(int id, Student student) throws IOException {
     for (Course course : this.courses) {
       if (course.getId() == id) {
-        course.addAttendee(student);
+       course.addAttendee(student);
+       courseFileService.editCourseInFile(course);
       }
     }
   }

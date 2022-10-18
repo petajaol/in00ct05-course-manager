@@ -22,12 +22,11 @@ public class CourseFileService {
     fileWriter.write(gson.toJson(course) + System.lineSeparator());
     fileWriter.close();
   }
-  
+
   public List<Course> getCoursesAsList() {
     List<Course> courses = new ArrayList<>();
     try {
       Scanner scanner = new Scanner(new File("courses.txt"));
-
       while (scanner.hasNextLine()) {
         courses.add(gson.fromJson(scanner.nextLine(), Course.class));
       }
@@ -36,5 +35,19 @@ public class CourseFileService {
     } catch (FileNotFoundException e) {
       return courses;
     }
+  }
+
+  public void editCourseInFile(Course editedCourse) throws IOException {
+    List<Course> courses = getCoursesAsList();
+    for (Course course : courses) {
+      if (course.getId() == editedCourse.getId()) {
+        courses.set(courses.indexOf(course), editedCourse);
+      }
+    }
+    FileWriter fileWriter = new FileWriter(new File("courses.txt"));
+    for (Course course : courses) {
+      fileWriter.write(gson.toJson(course) + System.lineSeparator());
+    }
+    fileWriter.close();
   }
 }

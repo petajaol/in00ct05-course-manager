@@ -37,7 +37,7 @@ public class CourseController {
   }
 
   @PostMapping("/courses/{id}/attendees")
-  public void addAttendee(@PathVariable int id, @RequestBody Student student) {
+  public void addAttendee(@PathVariable int id, @RequestBody Student student) throws IOException {
     courseService.addAttendee(id, student);
   }
 }
