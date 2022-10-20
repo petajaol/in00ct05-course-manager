@@ -1,32 +1,30 @@
 package com.in00ct05.coursemanager.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.in00ct05.coursemanager.data.Course;
-import com.in00ct05.coursemanager.data.Student;
-import com.in00ct05.coursemanager.fileservice.CourseFileService;
+import com.in00ct05.coursemanager.data.Enrolment;
 
 @Service
 public class CourseService {
-  private CourseFileService courseFileService;
-  private List<Course> courses = new ArrayList<>();
 
-  public CourseService(CourseFileService courseFileService) {
-    this.courseFileService = courseFileService;
-    this.setCourses();
+  private FileService fileService;
+  @Autowired
+  private EnrolmentService enrolmentService;
+  private List<Course> courses;
+
+  public CourseService(FileService fileService) {
+    this.fileService = fileService;
+    this.courses = fileService.getCoursesAsList();
     this.updateCourseIdCounter();
   }
 
   public List<Course> getCourses() {
     return this.courses;
-  }
-
-  public void setCourses() {
-    this.courses = courseFileService.getCoursesAsList();
   }
 
   public Course getCourseById(int id) {
@@ -38,38 +36,28 @@ public class CourseService {
     return null;
   }
 
-  public void addCourse(Course course) throws IOException {
+  public void addCourse(Course course) {
     this.courses.add(course);
-    courseFileService.writeCourseToFile(course);
+    fileService.writeCourseToFile(course);
   }
 
   public void updateCourseIdCounter() {
     if (!courses.isEmpty()) {
       Course.setCount(this.courses.size());
-      // List<Integer> ids = new ArrayList<>();
-      // for (Course course : courses) {
-      // ids.add(course.getId());
-      // }
-      // Course.setCount(Collections.max(ids));
     }
   }
 
-  public List<Student> getAttendeesByCourseId(int id) {
+  public List<Course> getAttendedCourses(int courseId) {
+    List<Enrolment> enrolments = enrolmentService.getEnrolmentsByStudentId(courseId);
+    List<Course> attendedCourses = new ArrayList<>();
     for (Course course : this.courses) {
-      if (course.getId() == id) {
-        return course.getAttendees();
+      for (Enrolment enrolment : enrolments) {
+        if (course.getId() == enrolment.getCourseId()) {
+          attendedCourses.add(course);
+        }
       }
     }
-    return null;
-  }
-
-  public void addAttendee(int id, Student student) throws IOException {
-    for (Course course : this.courses) {
-      if (course.getId() == id) {
-       course.addAttendee(student);
-       courseFileService.editCourseInFile(course);
-      }
-    }
+    return attendedCourses;
   }
 
 }

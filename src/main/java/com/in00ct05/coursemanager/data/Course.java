@@ -1,13 +1,9 @@
 package com.in00ct05.coursemanager.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Course {
   private static int count;
   private int id;
   private String name, teacher;
-  private List<Student> attendees = new ArrayList<>();
 
   public Course(String name, String teacher) {
     this.id = ++count;
@@ -37,14 +33,6 @@ public class Course {
 
   public void setTeacher(String teacher) {
     this.teacher = teacher;
-  }
-
-  public List<Student> getAttendees() {
-    return this.attendees;
-  }
-
-  public void addAttendee(Student student) {
-    this.attendees.add(student);
   }
 
 }

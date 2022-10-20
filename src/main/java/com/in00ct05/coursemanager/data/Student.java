@@ -11,6 +11,10 @@ public class Student {
     this.lastName = lastName;
   }
 
+  public static void setCount(int count) {
+    Student.count = count;
+  }
+
   public int getId() {
     return this.id;
   }
