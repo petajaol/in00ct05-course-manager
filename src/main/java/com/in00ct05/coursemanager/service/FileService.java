@@ -17,29 +17,32 @@ import com.in00ct05.coursemanager.data.Student;
 
 @Service
 public class FileService {
-  Gson gson = new Gson();
 
-  public void writeCourseToFile(Course course) {
+  private Gson gson = new Gson();
+
+  public List<Course> writeCourseToFile(Course course) {
     try {
       FileWriter fileWriter = new FileWriter(new File("database/courses.txt"), true);
       fileWriter.write(gson.toJson(course) + System.lineSeparator());
       fileWriter.close();
+      return this.getCoursesAsList();
     } catch (IOException e) {
       System.out.println("cannot write to file");
+      return this.getCoursesAsList();
     }
   }
 
-  public void writeCoursesToFile(List<Course> courses) {
-    try {
-      FileWriter fileWriter = new FileWriter(new File("database/courses.txt"), false);
-      for (Course course : courses) {
-        fileWriter.write(gson.toJson(course) + System.lineSeparator());
-      }
-      fileWriter.close();
-    } catch (IOException e) {
-      System.out.println("cannot write to file");
-    }
-  }
+  // public void writeCoursesToFile(List<Course> courses) {
+  //   try {
+  //     FileWriter fileWriter = new FileWriter(new File("database/courses.txt"), false);
+  //     for (Course course : courses) {
+  //       fileWriter.write(gson.toJson(course) + System.lineSeparator());
+  //     }
+  //     fileWriter.close();
+  //   } catch (IOException e) {
+  //     System.out.println("cannot write to file");
+  //   }
+  // }
 
   public List<Course> getCoursesAsList() {
     List<Course> courses = new ArrayList<>();
@@ -55,27 +58,31 @@ public class FileService {
     }
   }
 
-  public void writeStudentToFile(Student student) {
+  public List<Student> writeStudentToFile(Student student) {
     try {
       FileWriter fileWriter = new FileWriter(new File("database/students.txt"), true);
       fileWriter.write(gson.toJson(student) + System.lineSeparator());
       fileWriter.close();
+      return this.getStudentsAsList();
     } catch (IOException e) {
       System.out.println("cannot write to file");
+      return this.getStudentsAsList();
     }
   }
 
-  public void writeStudentsToFile(List<Student> students) {
-    try {
-      FileWriter fileWriter = new FileWriter(new File("database/students.txt"), false);
-      for (Student student : students) {
-        fileWriter.write(gson.toJson(student) + System.lineSeparator());
-      }
-      fileWriter.close();
-    } catch (IOException e) {
-      System.out.println("cannot write to file");
-    }
-  }
+  // public List<Student> writeStudentsToFile(List<Student> students) {
+  //   try {
+  //     FileWriter fileWriter = new FileWriter(new File("database/students.txt"), false);
+  //     for (Student student : students) {
+  //       fileWriter.write(gson.toJson(student) + System.lineSeparator());
+  //     }
+  //     fileWriter.close();
+  //     return this.getStudentsAsList();
+  //   } catch (IOException e) {
+  //     System.out.println("cannot write to file");
+  //     return this.getStudentsAsList();
+  //   }
+  // }
 
   public List<Student> getStudentsAsList() {
     List<Student> students = new ArrayList<>();
@@ -91,13 +98,19 @@ public class FileService {
     }
   }
 
-  public void writeEnrolmentToFile(Enrolment enrolment) {
+  public List<Enrolment> writeEnrolmentToFile(Enrolment enrolment) {
     try {
-      FileWriter fileWriter = new FileWriter(new File("database/enrolments.txt"), true);
-      fileWriter.write(gson.toJson(enrolment) + System.lineSeparator());
-      fileWriter.close();
+      if (checkIfCourseExists(enrolment)) {
+        FileWriter fileWriter = new FileWriter(new File("database/enrolments.txt"), true);
+        fileWriter.write(gson.toJson(enrolment) + System.lineSeparator());
+        fileWriter.close();
+        return this.getEnrolmentsAsList();
+      }
+      System.out.println("course or student doesn't exist");
+      return this.getEnrolmentsAsList();
     } catch (IOException e) {
       System.out.println("cannot write to file");
+      return this.getEnrolmentsAsList();
     }
   }
 
@@ -113,6 +126,16 @@ public class FileService {
     } catch (FileNotFoundException e) {
       return enrolments;
     }
+  }
+
+  public boolean checkIfCourseExists(Enrolment enrolment) {
+    List<Course> courses = this.getCoursesAsList();
+    return courses.stream().anyMatch(course -> enrolment.getCourseId() == course.getId());
+  }
+
+  public boolean checkIfStudentExists(Enrolment enrolment) {
+    List<Student> students = this.getStudentsAsList();
+    return students.stream().anyMatch(student -> enrolment.getStudentId() == student.getId());
   }
 
 }

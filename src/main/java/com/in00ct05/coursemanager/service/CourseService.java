@@ -12,9 +12,9 @@ import com.in00ct05.coursemanager.data.Enrolment;
 @Service
 public class CourseService {
 
-  private FileService fileService;
   @Autowired
   private EnrolmentService enrolmentService;
+  private FileService fileService;
   private List<Course> courses;
 
   public CourseService(FileService fileService) {
@@ -37,8 +37,7 @@ public class CourseService {
   }
 
   public void addCourse(Course course) {
-    this.courses.add(course);
-    fileService.writeCourseToFile(course);
+    this.courses = fileService.writeCourseToFile(course);
   }
 
   public void updateCourseIdCounter() {

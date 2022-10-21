@@ -1,6 +1,7 @@
 package com.in00ct05.coursemanager.data;
 
 public class Enrolment {
+
   private static int count;
   private int id, studentId, courseId;
 

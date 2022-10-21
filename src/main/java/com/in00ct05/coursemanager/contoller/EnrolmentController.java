@@ -8,6 +8,7 @@ import com.in00ct05.coursemanager.service.EnrolmentService;
 
 @RestController
 public class EnrolmentController {
+
   @Autowired
   private EnrolmentService enrolmentService;
 

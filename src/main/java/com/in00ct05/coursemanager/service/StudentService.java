@@ -11,9 +11,10 @@ import com.in00ct05.coursemanager.data.Student;
 
 @Service
 public class StudentService {
-  private FileService fileService;
+
   @Autowired
   private EnrolmentService enrolmentService;
+  private FileService fileService;
   private List<Student> students;
 
   public StudentService(FileService fileService) {
@@ -36,8 +37,7 @@ public class StudentService {
   }
 
   public void addStudent(Student student) {
-    this.students.add(student);
-    fileService.writeStudentToFile(student);
+    this.students = fileService.writeStudentToFile(student);
   }
 
   public void updateStudentIdCounter() {

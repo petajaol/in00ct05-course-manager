@@ -9,8 +9,9 @@ import com.in00ct05.coursemanager.data.Enrolment;
 
 @Service
 public class EnrolmentService {
-  List<Enrolment> enrolments;
-  FileService fileService;
+
+  private FileService fileService;
+  private List<Enrolment> enrolments;
 
   public EnrolmentService(FileService fileService) {
     this.fileService = fileService;
@@ -25,8 +26,7 @@ public class EnrolmentService {
   }
 
   public void enrolStudent(Enrolment enrolment) {
-    enrolments.add(enrolment);
-    fileService.writeEnrolmentToFile(enrolment);
+    this.enrolments = fileService.writeEnrolmentToFile(enrolment);
   }
 
   public List<Enrolment> getEnrolmentsByStudentId(int studentId) {

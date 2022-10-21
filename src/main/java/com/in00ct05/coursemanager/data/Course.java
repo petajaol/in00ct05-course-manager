@@ -1,6 +1,7 @@
 package com.in00ct05.coursemanager.data;
 
 public class Course {
+
   private static int count;
   private int id;
   private String name, teacher;
