@@ -11,6 +11,9 @@ import java.util.Scanner;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.in00ct05.coursemanager.data.Course;
+import com.in00ct05.coursemanager.data.Enrolment;
+import com.in00ct05.coursemanager.data.Student;
 
 @Service
 public class FileService {
@@ -31,23 +34,24 @@ public class FileService {
 
   public <T> List<T> writeToFile(T object, Class<T> type, String path) {
     try (FileWriter fileWriter = new FileWriter(new File(path), true)) {
-      // if (checkIfObjectExists(type, object, path)) {
+      if (object instanceof Enrolment && !checkIfCourseOrStudentExists((Enrolment) object, type)) {
+        System.out.println("course or student doesn't exist");
+        return this.getFileAsList(type, path);
+      }
       fileWriter.write(gson.toJson(object) + System.lineSeparator());
       return this.getFileAsList(type, path);
-      // }
-      // System.out.println("course or student doesn't exist");
-      // return this.getFileAsList(type, path);
     } catch (IOException e) {
       System.out.println("cannot write to file");
       return this.getFileAsList(type, path);
     }
   }
 
-  // public <T> boolean checkIfObjectExists(Class<T> type, T object, String path)
-  // {
-  // List<T> list = this.getFileAsList(type, path);
-  // return courses.stream().anyMatch(course -> enrolment.getCourseId() ==
-  // course.getId());
-  // }
+  public <T> boolean checkIfCourseOrStudentExists(Enrolment enrolment, Class<T> type) {
+    List<Course> courses = this.getFileAsList(Course.class, "database/courses.txt");
+    List<Student> students = this.getFileAsList(Student.class, "database/students.txt");
+    boolean courseExists = courses.stream().anyMatch(course -> enrolment.getCourseId() == course.getId());
+    boolean studentExists = students.stream().anyMatch(student -> enrolment.getStudentId() == student.getId());
+    return courseExists && studentExists;
+  }
 
 }
