@@ -34,7 +34,7 @@ public class FileService {
 
   public <T> List<T> writeToFile(T object, Class<T> type, String path) {
     try (FileWriter fileWriter = new FileWriter(new File(path), true)) {
-      if (object instanceof Enrolment && !checkIfCourseOrStudentExists((Enrolment) object, type)) {
+      if (object instanceof Enrolment && !checkIfCourseOrStudentExists((Enrolment) object)) {
         System.out.println("course or student doesn't exist");
         return this.getFileAsList(type, path);
       }
@@ -46,7 +46,7 @@ public class FileService {
     }
   }
 
-  public <T> boolean checkIfCourseOrStudentExists(Enrolment enrolment, Class<T> type) {
+  public <T> boolean checkIfCourseOrStudentExists(Enrolment enrolment) {
     List<Course> courses = this.getFileAsList(Course.class, "database/courses.txt");
     List<Student> students = this.getFileAsList(Student.class, "database/students.txt");
     boolean courseExists = courses.stream().anyMatch(course -> enrolment.getCourseId() == course.getId());
