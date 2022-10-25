@@ -2,7 +2,6 @@ package com.in00ct05.coursemanager.contoller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.in00ct05.coursemanager.data.Course;
@@ -11,8 +10,11 @@ import com.in00ct05.coursemanager.service.CourseService;
 @RestController
 public class CourseController {
 
-  @Autowired
-  private CourseService courseService;
+  private final CourseService courseService;
+
+  public CourseController(final CourseService courseService) {
+    this.courseService = courseService;
+  }
 
   @GetMapping("/courses")
   public List<Course> getCourses() {

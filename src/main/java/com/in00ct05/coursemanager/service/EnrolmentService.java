@@ -10,12 +10,13 @@ import com.in00ct05.coursemanager.data.Enrolment;
 @Service
 public class EnrolmentService {
 
-  private FileService fileService;
+  private final FileService fileService;
+  private static final String FILE_PATH = "database/enrolments.txt";
   private List<Enrolment> enrolments;
 
-  public EnrolmentService(FileService fileService) {
+  public EnrolmentService(final FileService fileService) {
     this.fileService = fileService;
-    this.enrolments = fileService.getEnrolmentsAsList();
+    this.enrolments = fileService.getFileAsList(Enrolment.class, FILE_PATH);
     this.updateEnrolmentIdCounter();
   }
 
@@ -26,7 +27,7 @@ public class EnrolmentService {
   }
 
   public void enrolStudent(Enrolment enrolment) {
-    this.enrolments = fileService.writeEnrolmentToFile(enrolment);
+    this.enrolments = fileService.writeToFile(enrolment, Enrolment.class, FILE_PATH);
   }
 
   public List<Enrolment> getEnrolmentsByStudentId(int studentId) {

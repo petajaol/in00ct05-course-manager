@@ -2,7 +2,6 @@ package com.in00ct05.coursemanager.contoller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.in00ct05.coursemanager.data.Student;
@@ -11,8 +10,11 @@ import com.in00ct05.coursemanager.service.StudentService;
 @RestController
 public class StudentController {
 
-  @Autowired
-  private StudentService studentService;
+  private final StudentService studentService;
+
+  public StudentController(final StudentService studentService) {
+    this.studentService = studentService;
+  }
 
   @GetMapping("/students")
   public List<Student> getStudents() {

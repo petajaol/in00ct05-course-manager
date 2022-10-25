@@ -3,7 +3,6 @@ package com.in00ct05.coursemanager.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.in00ct05.coursemanager.data.Course;
@@ -12,14 +11,15 @@ import com.in00ct05.coursemanager.data.Enrolment;
 @Service
 public class CourseService {
 
-  @Autowired
-  private EnrolmentService enrolmentService;
-  private FileService fileService;
+  private final EnrolmentService enrolmentService;
+  private final FileService fileService;
+  private static final String FILE_PATH = "database/courses.txt";
   private List<Course> courses;
 
-  public CourseService(FileService fileService) {
+  public CourseService(final EnrolmentService enrolmentService, final FileService fileService) {
+    this.enrolmentService = enrolmentService;
     this.fileService = fileService;
-    this.courses = fileService.getCoursesAsList();
+    this.courses = fileService.getFileAsList(Course.class, FILE_PATH);
     this.updateCourseIdCounter();
   }
 
@@ -37,7 +37,7 @@ public class CourseService {
   }
 
   public void addCourse(Course course) {
-    this.courses = fileService.writeCourseToFile(course);
+    this.courses = fileService.writeToFile(course, Course.class, FILE_PATH);
   }
 
   public void updateCourseIdCounter() {
