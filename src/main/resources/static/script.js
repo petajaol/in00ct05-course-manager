@@ -1,25 +1,29 @@
 getItems("students");
 getItems("courses");
 
-const courseForm = document.getElementById("courseform");
 const studentForm = document.getElementById("studentform");
-courseForm.addEventListener("submit", handleAddCourse);
-studentForm.addEventListener("submit", handleAddStudent);
+const courseForm = document.getElementById("courseform");
 
-function handleAddStudent() {
-  const newStudent = {
-    firstName: document.getElementById("firstName").value,
-    lastName: document.getElementById("lastName").value,
-  };
-  postItem(newStudent, "students");
-}
+courseForm.addEventListener("submit", (event) => handleSubmit(event));
+studentForm.addEventListener("submit", (event) => handleSubmit(event));
 
-function handleAddCourse() {
-  const newCourse = {
-    name: document.getElementById("name").value,
-    teacher: document.getElementById("teacher").value,
-  };
-  postItem(newCourse, "courses");
+function handleSubmit(event) {
+  let item, resource;
+  if (event.target.id === "studentform") {
+    item = {
+      firstName: document.getElementById("firstName").value,
+      lastName: document.getElementById("lastName").value,
+    };
+    resource = "students";
+  }
+  if (event.target.id === "courseform") {
+    item = {
+      name: document.getElementById("name").value,
+      teacher: document.getElementById("teacher").value,
+    };
+    resource = "courses";
+  }
+  postItem(item, resource);
 }
 
 async function postItem(item, resource) {
