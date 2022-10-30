@@ -27,7 +27,8 @@ public class EnrolmentService {
   }
 
   public void enrolStudent(Enrolment enrolment) {
-    this.enrolments = fileService.writeToFile(enrolment, Enrolment.class, FILE_PATH);
+    fileService.writeToFile(enrolment, Enrolment.class, FILE_PATH);
+    this.enrolments = fileService.getFileAsList(Enrolment.class, FILE_PATH);
   }
 
   public List<Enrolment> getEnrolmentsByStudentId(int studentId) {

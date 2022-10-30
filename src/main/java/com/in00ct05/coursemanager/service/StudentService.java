@@ -20,6 +20,7 @@ public class StudentService {
     this.enrolmentService = enrolmentService;
     this.fileService = fileService;
     this.students = fileService.getFileAsList(Student.class, FILE_PATH);
+    System.out.println("studentservice init " + this.students);
     this.updateStudentIdCounter();
   }
 
@@ -37,7 +38,8 @@ public class StudentService {
   }
 
   public void addStudent(Student student) {
-    this.students = fileService.writeToFile(student, Student.class, FILE_PATH);
+    fileService.writeToFile(student, Student.class, FILE_PATH);
+    this.students = fileService.getFileAsList(Student.class, FILE_PATH);
   }
 
   public void updateStudentIdCounter() {

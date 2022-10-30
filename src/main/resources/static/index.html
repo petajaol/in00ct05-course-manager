@@ -7,12 +7,41 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="/students" method="post">
+    <form id="studentform">
       <label for="firstName">First name:</label>
       <input type="text" id="firstName" name="firstName" /><br /><br />
       <label for="lastName">Last name:</label>
       <input type="text" id="lastName" name="lastName" /><br /><br />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Add student"/>
     </form>
+    <form id="courseform">
+      <label for="courseName">Course name:</label>
+      <input type="text" id="name" name="name" /><br /><br />
+      <label for="teacher">Teacher:</label>
+      <input type="text" id="teacher" name="teacher" /><br /><br />
+      <input type="submit" value="Add course" />
+    </form>
+    <div style="overflow-x: auto">
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>First name</th>
+          <th>Last name</th>
+        </tr>
+        <tbody id="students"></tbody>
+      </table>
+    </div>
+    <div style="overflow-x: auto">
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Teacher</th>
+        </tr>
+        <tbody id="courses"></tbody>
+      </table>
+    </div>
+    <script src="students.js"></script>
+    <script src="courses.js"></script>
   </body>
 </html>

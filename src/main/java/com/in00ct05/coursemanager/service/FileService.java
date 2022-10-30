@@ -28,25 +28,23 @@ public class FileService {
       }
       return list;
     } catch (FileNotFoundException e) {
+      System.out.println("cannot read from file");
       return list;
     }
   }
 
-  public <T> List<T> writeToFile(T object, Class<T> type, String path) {
+  public <T> void writeToFile(T object, Class<T> type, String path) {
     try (FileWriter fileWriter = new FileWriter(new File(path), true)) {
       if (object instanceof Enrolment && !checkIfCourseOrStudentExists((Enrolment) object)) {
         System.out.println("course or student doesn't exist");
-        return this.getFileAsList(type, path);
       }
       fileWriter.write(gson.toJson(object) + System.lineSeparator());
-      return this.getFileAsList(type, path);
     } catch (IOException e) {
       System.out.println("cannot write to file");
-      return this.getFileAsList(type, path);
     }
   }
 
-  public <T> boolean checkIfCourseOrStudentExists(Enrolment enrolment) {
+  public boolean checkIfCourseOrStudentExists(Enrolment enrolment) {
     List<Course> courses = this.getFileAsList(Course.class, "database/courses.txt");
     List<Student> students = this.getFileAsList(Student.class, "database/students.txt");
     boolean courseExists = courses.stream().anyMatch(course -> enrolment.getCourseId() == course.getId());
