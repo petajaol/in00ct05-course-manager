@@ -36,9 +36,10 @@ public class CourseService {
     return null;
   }
 
-  public void addCourse(Course course) {
+  public Course addCourse(Course course) {
     fileService.writeToFile(course, Course.class, FILE_PATH);
     this.courses = fileService.getFileAsList(Course.class, FILE_PATH);
+    return course;
   }
 
   public void updateCourseIdCounter() {

@@ -7,6 +7,7 @@
     <title>Document</title>
   </head>
   <body>
+    <h2>Add a new student</h2>
     <form id="studentform">
       <label for="firstName">First name:</label>
       <input type="text" id="firstName" name="firstName" /><br /><br />
@@ -14,12 +15,21 @@
       <input type="text" id="lastName" name="lastName" /><br /><br />
       <input type="submit" value="Add student"/>
     </form>
+    <h2>Add a new course</h2>
     <form id="courseform">
       <label for="courseName">Course name:</label>
       <input type="text" id="name" name="name" /><br /><br />
       <label for="teacher">Teacher:</label>
       <input type="text" id="teacher" name="teacher" /><br /><br />
       <input type="submit" value="Add course" />
+    </form>
+    <h2>Enrol student on a course</h2>
+    <form id="enrolmentform">
+      <label for="studentId">Student ID:</label>
+      <input type="text" id="studentId" name="studentId" /><br /><br />
+      <label for="courseId">Course ID:</label>
+      <input type="text" id="courseId" name="courseId" /><br /><br />
+      <input type="submit" value="Enrol" />
     </form>
     <div style="overflow-x: auto">
       <table>

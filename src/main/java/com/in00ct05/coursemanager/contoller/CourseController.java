@@ -32,8 +32,8 @@ public class CourseController {
   }
 
   @PostMapping("/courses")
-  public void addCourse(@RequestBody Course course) {
-    courseService.addCourse(course);
+  public Course addCourse(@RequestBody Course course) {
+    return courseService.addCourse(course);
   }
 
 }

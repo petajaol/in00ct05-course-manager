@@ -37,9 +37,10 @@ public class StudentService {
     return null;
   }
 
-  public void addStudent(Student student) {
+  public Student addStudent(Student student) {
     fileService.writeToFile(student, Student.class, FILE_PATH);
     this.students = fileService.getFileAsList(Student.class, FILE_PATH);
+    return student;
   }
 
   public void updateStudentIdCounter() {
