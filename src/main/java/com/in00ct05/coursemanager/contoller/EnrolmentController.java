@@ -15,7 +15,7 @@ public class EnrolmentController {
   }
 
   @PostMapping("/enrolment")
-  public void enrolStudent(@RequestBody Enrolment enrolment) {
-    enrolmentService.enrolStudent(enrolment);
+  public boolean enrolStudent(@RequestBody Enrolment enrolment) {
+    return enrolmentService.enrolStudent(enrolment);
   }
 }

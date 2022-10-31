@@ -26,9 +26,11 @@ public class EnrolmentService {
     }
   }
 
-  public void enrolStudent(Enrolment enrolment) {
-    fileService.writeToFile(enrolment, Enrolment.class, FILE_PATH);
+  public boolean enrolStudent(Enrolment enrolment) {
+    boolean validation = fileService.writeToFile(enrolment, Enrolment.class, FILE_PATH);
     this.enrolments = fileService.getFileAsList(Enrolment.class, FILE_PATH);
+    this.updateEnrolmentIdCounter();
+    return validation;
   }
 
   public List<Enrolment> getEnrolmentsByStudentId(int studentId) {

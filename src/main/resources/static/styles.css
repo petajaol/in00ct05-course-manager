@@ -1,0 +1,33 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 25px;
+}
+
+.form {
+  border: 1px solid black;
+  padding: 0 10px;
+}
+
+#forms {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  color: blue;
+}
+
+td:not(:first-child) {
+  color: black;
+}
+
+

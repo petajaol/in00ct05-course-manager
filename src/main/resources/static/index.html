@@ -4,34 +4,44 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Course Manager</title>
   </head>
   <body>
-    <h2>Add a new student</h2>
-    <form id="studentform">
-      <label for="firstName">First name:</label>
-      <input type="text" id="firstName" name="firstName" /><br /><br />
-      <label for="lastName">Last name:</label>
-      <input type="text" id="lastName" name="lastName" /><br /><br />
-      <input type="submit" value="Add student"/>
-    </form>
-    <h2>Add a new course</h2>
-    <form id="courseform">
-      <label for="courseName">Course name:</label>
-      <input type="text" id="name" name="name" /><br /><br />
-      <label for="teacher">Teacher:</label>
-      <input type="text" id="teacher" name="teacher" /><br /><br />
-      <input type="submit" value="Add course" />
-    </form>
-    <h2>Enrol student on a course</h2>
-    <form id="enrolmentform">
-      <label for="studentId">Student ID:</label>
-      <input type="text" id="studentId" name="studentId" /><br /><br />
-      <label for="courseId">Course ID:</label>
-      <input type="text" id="courseId" name="courseId" /><br /><br />
-      <input type="submit" value="Enrol" />
-    </form>
-    <div style="overflow-x: auto">
+    <div id="forms">
+      <div class="form">
+        <h2>Add a new student</h2>
+        <form id="student-form">
+          <label for="firstName">First name:</label>
+          <input type="text" id="firstName" name="firstName" />
+          <label for="lastName">Last name:</label>
+          <input type="text" id="lastName" name="lastName" />
+          <input type="submit" value="Add student" />
+        </form>
+      </div>
+      <div class="form">
+        <h2>Add a new course</h2>
+        <form id="course-form">
+          <label for="courseName">Course name:</label>
+          <input type="text" id="name" name="name" />
+          <label for="teacher">Teacher:</label>
+          <input type="text" id="teacher" name="teacher" />
+          <input type="submit" value="Add course" />
+        </form>
+      </div>
+      <div class="form">
+        <h2>Enrol student on a course</h2>
+        <form id="enrolment-form">
+          <label for="studentId">Student ID:</label>
+          <input type="text" id="studentId" name="studentId" />
+          <label for="courseId">Course ID:</label>
+          <input type="text" id="courseId" name="courseId" />
+          <input type="submit" value="Enrol" />
+        </form>
+      </div>
+    </div>
+   
+      <h2>Students</h2>
       <table>
         <tr>
           <th>Id</th>
@@ -40,8 +50,9 @@
         </tr>
         <tbody id="students"></tbody>
       </table>
-    </div>
-    <div style="overflow-x: auto">
+
+   
+      <h2>Courses</h2>
       <table>
         <tr>
           <th>Id</th>
@@ -50,7 +61,7 @@
         </tr>
         <tbody id="courses"></tbody>
       </table>
-    </div>
+ 
     <script src="script.js"></script>
   </body>
 </html>

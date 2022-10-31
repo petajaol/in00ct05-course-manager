@@ -20,7 +20,6 @@ public class StudentService {
     this.enrolmentService = enrolmentService;
     this.fileService = fileService;
     this.students = fileService.getFileAsList(Student.class, FILE_PATH);
-    System.out.println("studentservice init " + this.students);
     this.updateStudentIdCounter();
   }
 

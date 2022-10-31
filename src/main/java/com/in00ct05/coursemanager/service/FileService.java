@@ -33,14 +33,16 @@ public class FileService {
     }
   }
 
-  public <T> void writeToFile(T object, Class<T> type, String path) {
+  public <T> boolean writeToFile(T object, Class<T> type, String path) {
     try (FileWriter fileWriter = new FileWriter(new File(path), true)) {
       if (object instanceof Enrolment && !checkIfCourseOrStudentExists((Enrolment) object)) {
-        System.out.println("course or student doesn't exist");
+        return false;
       }
       fileWriter.write(gson.toJson(object) + System.lineSeparator());
+      return true;
     } catch (IOException e) {
       System.out.println("cannot write to file");
+      return true;
     }
   }
 
