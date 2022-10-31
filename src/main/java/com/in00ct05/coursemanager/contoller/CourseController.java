@@ -5,19 +5,20 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.in00ct05.coursemanager.data.Course;
-import com.in00ct05.coursemanager.service.CourseService;
+import com.in00ct05.coursemanager.data.RegularCourse;
+import com.in00ct05.coursemanager.service.RegularCourseService;
 
 @RestController
 public class CourseController {
 
-  private final CourseService courseService;
+  private final RegularCourseService courseService;
 
-  public CourseController(final CourseService courseService) {
+  public CourseController(final RegularCourseService courseService) {
     this.courseService = courseService;
   }
 
   @GetMapping("/courses")
-  public List<Course> getCourses() {
+  public List<RegularCourse> getCourses() {
     return courseService.getItems();
   }
 
@@ -32,7 +33,7 @@ public class CourseController {
   }
 
   @PostMapping("/courses")
-  public Course addCourse(@RequestBody Course course) {
+  public Course addCourse(@RequestBody RegularCourse course) {
     return courseService.add(course);
   }
 

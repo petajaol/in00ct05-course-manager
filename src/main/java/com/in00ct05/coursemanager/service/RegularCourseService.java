@@ -7,28 +7,29 @@ import org.springframework.stereotype.Service;
 
 import com.in00ct05.coursemanager.data.Course;
 import com.in00ct05.coursemanager.data.Enrolment;
+import com.in00ct05.coursemanager.data.RegularCourse;
 
 @Service
-public class CourseService implements ServiceInterface<Course> {
+public class RegularCourseService extends Course implements ServiceInterface<RegularCourse> {
 
   private final EnrolmentService enrolmentService;
   private final FileService fileService;
   private static final String FILE_PATH = "database/courses.txt";
-  private List<Course> courses;
+  private List<RegularCourse> courses;
 
-  public CourseService(final EnrolmentService enrolmentService, final FileService fileService) {
+  public RegularCourseService(final EnrolmentService enrolmentService, final FileService fileService) {
     this.enrolmentService = enrolmentService;
     this.fileService = fileService;
-    this.courses = fileService.getFileAsList(Course.class, FILE_PATH);
+    this.courses = fileService.getFileAsList(RegularCourse.class, FILE_PATH);
     this.updateIdCounter();
   }
 
-  public List<Course> getItems() {
+  public List<RegularCourse> getItems() {
     return this.courses;
   }
 
-  public Course getById(int id) {
-    for (Course course : this.courses) {
+  public RegularCourse getById(int id) {
+    for (RegularCourse course : this.courses) {
       if (course.getId() == id) {
         return course;
       }
@@ -36,9 +37,9 @@ public class CourseService implements ServiceInterface<Course> {
     return null;
   }
 
-  public Course add(Course course) {
+  public RegularCourse add(RegularCourse course) {
     fileService.writeToFile(course, Course.class, FILE_PATH);
-    this.courses = fileService.getFileAsList(Course.class, FILE_PATH);
+    this.courses = fileService.getFileAsList(RegularCourse.class, FILE_PATH);
     return course;
   }
 

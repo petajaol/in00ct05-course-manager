@@ -1,15 +1,20 @@
 package com.in00ct05.coursemanager.data;
 
-public class Course {
+public abstract class Course {
 
   private static int count;
   private int id;
-  private String name, teacher;
+  private String name, teacher, type;
 
-  public Course(String name, String teacher) {
+  public Course(String name, String teacher, String type) {
     this.id = ++count;
     this.name = name;
     this.teacher = teacher;
+    this.type = type;
+  }
+
+  public Course() {
+    this("", "", "");
   }
 
   public static void setCount(int count) {
@@ -34,6 +39,14 @@ public class Course {
 
   public void setTeacher(String teacher) {
     this.teacher = teacher;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
 }

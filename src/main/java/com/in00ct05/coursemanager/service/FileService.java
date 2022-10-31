@@ -11,8 +11,8 @@ import java.util.Scanner;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.in00ct05.coursemanager.data.Course;
 import com.in00ct05.coursemanager.data.Enrolment;
+import com.in00ct05.coursemanager.data.RegularCourse;
 import com.in00ct05.coursemanager.data.Student;
 
 @Service
@@ -47,7 +47,7 @@ public class FileService {
   }
 
   public boolean checkIfCourseOrStudentExists(Enrolment enrolment) {
-    List<Course> courses = this.getFileAsList(Course.class, "database/courses.txt");
+    List<RegularCourse> courses = this.getFileAsList(RegularCourse.class, "database/courses.txt");
     List<Student> students = this.getFileAsList(Student.class, "database/students.txt");
     boolean courseExists = courses.stream().anyMatch(course -> enrolment.getCourseId() == course.getId());
     boolean studentExists = students.stream().anyMatch(student -> enrolment.getStudentId() == student.getId());
