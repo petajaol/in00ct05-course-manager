@@ -18,12 +18,12 @@ public class CourseController {
 
   @GetMapping("/courses")
   public List<Course> getCourses() {
-    return courseService.getCourses();
+    return courseService.getItems();
   }
 
   @GetMapping("/courses/{id}")
   public Course getCourse(@PathVariable int id) {
-    return courseService.getCourseById(id);
+    return courseService.getById(id);
   }
 
   @GetMapping("/courses/student/{id}")
@@ -33,7 +33,7 @@ public class CourseController {
 
   @PostMapping("/courses")
   public Course addCourse(@RequestBody Course course) {
-    return courseService.addCourse(course);
+    return courseService.add(course);
   }
 
 }

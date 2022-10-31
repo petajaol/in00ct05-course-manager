@@ -18,12 +18,12 @@ public class StudentController {
 
   @GetMapping("/students")
   public List<Student> getStudents() {
-    return studentService.getStudents();
+    return studentService.getItems();
   }
 
   @GetMapping("/students/{id}")
   public Student getStudent(@PathVariable int id) {
-    return studentService.getStudentById(id);
+    return studentService.getById(id);
   }
 
   @GetMapping("/students/course/{id}")
@@ -33,7 +33,7 @@ public class StudentController {
 
   @PostMapping("/students")
   public Student addStudent(@RequestBody Student student) {
-    return studentService.addStudent(student);
+    return studentService.add(student);
   }
 
 }
