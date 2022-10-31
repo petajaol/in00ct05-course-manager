@@ -7,7 +7,7 @@ public class RegularCourse extends Course {
   }
 
   public RegularCourse() {
-    super("", "", "");
+    super("", "", "regular");
   }
   
 }
