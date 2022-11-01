@@ -1,21 +1,27 @@
 package com.in00ct05.coursemanager.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public abstract class Course {
 
-  private final String id = java.util.UUID.randomUUID().toString();
+  private static int count;
+  private int id;
   private String name, teacher, type;
 
-  public Course(String name, String teacher, String type) {
+  @JsonCreator
+  public Course(@JsonProperty("name") String name, @JsonProperty("teacher") String teacher, @JsonProperty("type") String type) {
+    this.id = ++count;
     this.name = name;
     this.teacher = teacher;
     this.type = type;
   }
 
-  public Course() {
-    this("", "", "");
+  public static void setCount(int count) {
+    Course.count = count;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 

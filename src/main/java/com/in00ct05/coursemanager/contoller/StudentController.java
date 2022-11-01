@@ -22,12 +22,12 @@ public class StudentController {
   }
 
   @GetMapping("/students/{id}")
-  public Student getStudent(@PathVariable String id) {
+  public Student getStudent(@PathVariable int id) {
     return studentService.getById(id);
   }
 
   @GetMapping("/students/course/{id}")
-  public List<Student> getAttendees(@PathVariable String id) {
+  public List<Student> getAttendees(@PathVariable int id) {
     return studentService.getAttendees(id);
   }
 

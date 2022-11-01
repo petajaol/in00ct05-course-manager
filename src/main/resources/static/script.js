@@ -58,6 +58,8 @@ function validateItem(body) {
 function validateEnrolment(response) {
   if (!response) {
     alert("NO CORRESPONDING STUDENT/COURSE");
+  } else {
+    alert("ENROLMENT SUCCESSFUL");
   }
 }
 
@@ -91,6 +93,7 @@ function showItemsInTable(items, resource) {
   document.getElementById(resource).innerHTML = "";
   items.map((item) => {
     const row = table.insertRow();
+    item = { id: item.id, ...item };
     for (const prop in item) {
       row.insertCell().innerHTML = `${item[prop]}`;
     }
@@ -100,6 +103,7 @@ function showItemsInTable(items, resource) {
 function showItemInTable(item, resource) {
   const table = document.getElementById(resource);
   const row = table.insertRow();
+  item = { id: item.id, ...item };
   for (const prop in item) {
     row.insertCell().innerHTML = `${item[prop]}`;
   }

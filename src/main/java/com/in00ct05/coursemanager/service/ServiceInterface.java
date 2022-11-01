@@ -5,7 +5,8 @@ import java.util.List;
 interface ServiceInterface<T> {
 
   List<T> getItems();
-  T getById(String id);
+  void updateIdCounter();
+  T getById(int id);
   T add(T item);
 
 }

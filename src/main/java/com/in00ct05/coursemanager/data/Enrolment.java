@@ -1,19 +1,18 @@
 package com.in00ct05.coursemanager.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Enrolment {
 
   private static int count;
-  private int id;
-  private String studentId, courseId;
+  private int id, studentId, courseId;
 
-  public Enrolment(String studentId, String courseId) {
+  @JsonCreator
+  public Enrolment(@JsonProperty("studentId") int studentId, @JsonProperty("courseid") int courseId) {
     this.id = ++count;
     this.studentId = studentId;
     this.courseId = courseId;
-  }
-
-  public Enrolment() {
-    this("", "");
   }
 
   public static void setCount(int count) {
@@ -28,19 +27,19 @@ public class Enrolment {
     this.id = id;
   }
 
-  public String getStudentId() {
+  public int getStudentId() {
     return studentId;
   }
 
-  public void setStudentId(String studentId) {
+  public void setStudentId(int studentId) {
     this.studentId = studentId;
   }
 
-  public String getCourseId() {
+  public int getCourseId() {
     return courseId;
   }
 
-  public void setCourseId(String courseId) {
+  public void setCourseId(int courseId) {
     this.courseId = courseId;
   }
 }

@@ -33,7 +33,7 @@ public class EnrolmentService {
     return validation;
   }
 
-  public List<Enrolment> getEnrolmentsByStudentId(String studentId) {
+  public List<Enrolment> getEnrolmentsByStudentId(int studentId) {
     List<Enrolment> enrolments = new ArrayList<>();
     for (Enrolment enrolment : this.enrolments) {
       if (enrolment.getStudentId() == studentId) {
@@ -43,7 +43,7 @@ public class EnrolmentService {
     return enrolments;
   }
 
-  public List<Enrolment> getEnrolmentsByCourseId(String courseId) {
+  public List<Enrolment> getEnrolmentsByCourseId(int courseId) {
     List<Enrolment> enrolments = new ArrayList<>();
     for (Enrolment enrolment : this.enrolments) {
       if (enrolment.getCourseId() == courseId) {

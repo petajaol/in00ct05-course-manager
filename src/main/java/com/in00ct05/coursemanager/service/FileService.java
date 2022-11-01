@@ -49,8 +49,8 @@ public class FileService {
   public boolean checkIfCourseOrStudentExists(Enrolment enrolment) {
     List<RegularCourse> courses = this.getFileAsList(RegularCourse.class, "database/courses.txt");
     List<Student> students = this.getFileAsList(Student.class, "database/students.txt");
-    boolean courseExists = courses.stream().anyMatch(course -> enrolment.getCourseId().equals(course.getId()));
-    boolean studentExists = students.stream().anyMatch(student -> enrolment.getStudentId().equals(student.getId()));
+    boolean courseExists = courses.stream().anyMatch(course -> enrolment.getCourseId() == course.getId());
+    boolean studentExists = students.stream().anyMatch(student -> enrolment.getStudentId() == student.getId());
     return courseExists && studentExists;
   }
 

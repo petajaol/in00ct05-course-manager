@@ -1,20 +1,26 @@
 package com.in00ct05.coursemanager.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Student {
 
-  private final String id = java.util.UUID.randomUUID().toString();
+  private static int count;
+  private int id;
   private String firstName, lastName;
   
-  public Student(String firstName, String lastName) {
+  @JsonCreator
+  public Student(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName) {
+    this.id = ++count;
     this.firstName = firstName;
     this.lastName = lastName;
   }
 
-  public Student() {
-    this("", "");
+  public static void setCount(int count) {
+    Student.count = count;
   }
 
-  public String getId() {
+  public int getId() {
     return this.id;
   }
 
