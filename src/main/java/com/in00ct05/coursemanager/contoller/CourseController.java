@@ -23,12 +23,12 @@ public class CourseController {
   }
 
   @GetMapping("/courses/{id}")
-  public Course getCourse(@PathVariable int id) {
+  public Course getCourse(@PathVariable String id) {
     return courseService.getById(id);
   }
 
   @GetMapping("/courses/student/{id}")
-  public List<Course> getAttendedCourses(@PathVariable int id) {
+  public List<Course> getAttendedCourses(@PathVariable String id) {
     return courseService.getAttendedCourses(id);
   }
 

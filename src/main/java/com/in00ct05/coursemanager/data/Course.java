@@ -2,12 +2,10 @@ package com.in00ct05.coursemanager.data;
 
 public abstract class Course {
 
-  private static int count;
-  private int id;
+  private final String id = java.util.UUID.randomUUID().toString();
   private String name, teacher, type;
 
   public Course(String name, String teacher, String type) {
-    this.id = ++count;
     this.name = name;
     this.teacher = teacher;
     this.type = type;
@@ -17,11 +15,7 @@ public abstract class Course {
     this("", "", "");
   }
 
-  public static void setCount(int count) {
-    Course.count = count;
-  }
-
-  public int getId() {
+  public String getId() {
     return id;
   }
 

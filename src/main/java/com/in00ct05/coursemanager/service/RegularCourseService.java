@@ -21,14 +21,13 @@ public class RegularCourseService extends Course implements ServiceInterface<Reg
     this.enrolmentService = enrolmentService;
     this.fileService = fileService;
     this.courses = fileService.getFileAsList(RegularCourse.class, FILE_PATH);
-    this.updateIdCounter();
   }
 
   public List<RegularCourse> getItems() {
     return this.courses;
   }
 
-  public RegularCourse getById(int id) {
+  public RegularCourse getById(String id) {
     for (RegularCourse course : this.courses) {
       if (course.getId() == id) {
         return course;
@@ -43,13 +42,7 @@ public class RegularCourseService extends Course implements ServiceInterface<Reg
     return course;
   }
 
-  public void updateIdCounter() {
-    if (!courses.isEmpty()) {
-      Course.setCount(this.courses.size());
-    }
-  }
-
-  public List<Course> getAttendedCourses(int courseId) {
+  public List<Course> getAttendedCourses(String courseId) {
     List<Enrolment> enrolments = enrolmentService.getEnrolmentsByStudentId(courseId);
     List<Course> attendedCourses = new ArrayList<>();
     for (Course course : this.courses) {

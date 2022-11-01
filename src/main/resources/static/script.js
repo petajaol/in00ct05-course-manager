@@ -57,7 +57,7 @@ function validateItem(body) {
 
 function validateEnrolment(response) {
   if (!response) {
-    alert("COURSE OR STUDENT DOESN'T EXIST");
+    alert("NO CORRESPONDING STUDENT/COURSE");
   }
 }
 

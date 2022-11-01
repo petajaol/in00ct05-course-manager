@@ -20,14 +20,13 @@ public class StudentService implements ServiceInterface<Student> {
     this.enrolmentService = enrolmentService;
     this.fileService = fileService;
     this.students = fileService.getFileAsList(Student.class, FILE_PATH);
-    this.updateIdCounter();
   }
 
   public List<Student> getItems() {
     return this.students;
   }
 
-  public Student getById(int id) {
+  public Student getById(String id) {
     for (Student student : this.students) {
       if (student.getId() == id) {
         return student;
@@ -42,13 +41,7 @@ public class StudentService implements ServiceInterface<Student> {
     return student;
   }
 
-  public void updateIdCounter() {
-    if (!students.isEmpty()) {
-      Student.setCount(this.students.size());
-    }
-  }
-
-  public List<Student> getAttendees(int courseId) {
+  public List<Student> getAttendees(String courseId) {
     List<Enrolment> enrolments = enrolmentService.getEnrolmentsByCourseId(courseId);
     List<Student> attendees = new ArrayList<>();
     for (Student student : this.students) {
